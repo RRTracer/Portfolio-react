@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home';
+import LandingPage from './Pages/LandingPage';
+import NotFound from "./Pages/NotFound.jsx";
 function App() {
   
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<LandingPage />} />
 
         </Routes>
       </Router>
