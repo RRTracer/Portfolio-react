@@ -67,3 +67,8 @@ To contact me please use the form on the my [website](https://react-portfolio-rr
 
 Thank you for visiting my portfolio!
 
+## License
+
+This project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. See the [LICENSE Creative Commons by-sa](LICENSE%20Creative%20Commons%20by-sa) file for more details.
+
+
