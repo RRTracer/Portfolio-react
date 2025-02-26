@@ -3,7 +3,7 @@ import {Laugh} from "lucide-react";
 const FooterComp = () => {
   return (
     <div className="dark:text-white flex flex-row items-center justify-between p-10  shadow-2xl w-full h-2 absolute ">
-      <a href="#"><img className="w-[5rem] h-auto" src="Img/logo.png" alt=""/></a>
+      <a href="#"><img className="w-[5rem] h-auto" src="Img/myLogo.jpeg" alt=""/></a>
       <a href="#"><h1 className="text-xl font-bold"> Thanks to have read my React&apos;s portfolio !</h1></a>
       <ul className="flex flex-col italic dark:list-image-[url(Img/map-pin2.svg)] list-image-[url(Img/map-pin-lightmode2.svg)] p-2 gap-2">
         <li><a href="https://github.com/RRTracer">My Github</a></li>
