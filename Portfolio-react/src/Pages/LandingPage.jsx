@@ -3,6 +3,7 @@ import Who from "../Components/Who.jsx";
 import Home from "../Components/Home.jsx";
 import WorkOn from "../Components/WorkOn.jsx";
 import ContactMe from "../Components/ContactMe.jsx";
+import FooterComp from "../Components/FooterComp.jsx";
 import {useEffect} from "react";
 import ScrollReveal from 'scrollreveal';
 
@@ -76,6 +77,7 @@ const LandingPage = () => {
           <ContactMe />
 
       </section>
+        <FooterComp/>
     </div>
   )
 }
