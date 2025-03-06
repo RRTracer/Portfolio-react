@@ -9,6 +9,7 @@ import ScrollReveal from 'scrollreveal';
 
 
 const LandingPage = () => {
+
     useEffect(() => {
         ScrollReveal().reveal('.reveal', {
             origin: "top",
@@ -16,24 +17,12 @@ const LandingPage = () => {
             duration: "900",
             reset: true,
         });
-
     })
-
-    const item = [
-        { name: "Home", href: "#home"},
-        { name: "About", href: "#who" },
-        { name: "Projects", href: "#projects" },
-        { name: "Contact", href: "#contact"}
-    ]
-
 
   return (
     <div className="">
         <div className="fixed top-0 w-full z-50 ">
-            <Navbar
-                title="RRTracer Portofolio"
-                item={item}
-            />
+            <Navbar/>
         </div>
       <section id="home" className="reveal mbr-section-full mbr-parallax-background" >
           <br/>
