@@ -13,4 +13,15 @@ const CveTop5 = async () => {
   }
 };
 
-export { CveTop5 };
+const GetAllCve = async () => {
+  try {
+    const response = await axios.get(`${urlApi}all/`);
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
+export { CveTop5, GetAllCve };

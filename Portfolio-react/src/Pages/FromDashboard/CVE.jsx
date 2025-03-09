@@ -1,11 +1,13 @@
-import Top5CveToday from "../../Components/Dashboard_component/Top5CveToday";
 import Navbar from "./../../Components/Navbar";
+import AllCve from "./../../Components/Dashboard_component/AllCve";
 const CVE = () => {
   return (
     <div>
-      <Navbar />
-      <div>
-        <Top5CveToday preview={false} />
+      <div className="fixed top-0 w-full z-50 ">
+        <Navbar />
+      </div>
+      <div className="pt-25">
+        <AllCve preview={false} />
       </div>
     </div>
   );

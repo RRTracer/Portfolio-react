@@ -98,3 +98,52 @@ def top_cve(request):
 
     except Exception as e:
         return Response({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+@api_view(['GET'])
+def GetAllCve(request):
+    try:
+        response = requests.get(API_URL)
+        data = response.json()
+        cve_list = data.get("vulnerabilities", [])
+
+        # Trier par date de publication (descendant)
+        sorted_cve = sorted(
+            cve_list,
+            key=lambda x: x["cve"]["published"],
+            reverse=True
+        )
+
+        result = []
+        for item in sorted_cve:
+            cve_info = item["cve"]
+            cve_id = cve_info["id"]
+
+            # Récupérer la description en anglais
+            description = next(
+                (desc["value"] for desc in cve_info.get("descriptions", []) if desc["lang"] == "en"),
+                "No description available"
+            )
+
+            # Récupérer la sévérité (si présente)
+            metrics = cve_info.get("metrics", {}).get("cvssMetricV2", [])
+            severity = metrics[0].get("baseSeverity") if metrics else "Unknown"
+
+            # Générer les topics basés sur la description
+            topics = extract_topics(description)
+
+            # Construire l'objet de réponse
+            result.append({
+                "id": cve_id,
+                "name": cve_id,
+                "description": description,
+                "url": f"https://nvd.nist.gov/vuln/detail/{cve_id}",
+                "severity": severity,  # 🔥 Ajout de la sévérité
+                "topics": topics  # 🔥 Ajout des mots-clés
+            })
+
+        return Response(result)
+
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)
