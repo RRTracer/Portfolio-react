@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { GetAllCve } from "../../API/CveCaller";
-import PropTypes from "prop-types";
 
-const AllCve = ({ preview }) => {
-  const [top5, setTop5] = useState([]);
-  const isPreview = preview;
+const AllCve = () => {
+  const [cve, setCve] = useState([]);
   useEffect(() => {
     const fetchCve = async () => {
       const response = await GetAllCve();
-      setTop5(response);
+      setCve(response);
     };
     fetchCve();
   }, []);
@@ -20,60 +17,31 @@ const AllCve = ({ preview }) => {
           All new CVE
         </h1>
       </div>
-      {!isPreview ? (
-        <div className="space-y-2">
-          {top5.length === 0 ? (
-            <p className="text-gray-600 dark:text-gray-300">
-              No data available.
-            </p>
-          ) : (
-            top5.map((cve, index) => (
-              <div key={index} className="border-b pb-3 last:border-none">
-                <a
-                  href={cve.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 font-semibold hover:underline"
-                >
-                  {cve.name}
-                </a>
-                <p className="text-gray-600 dark:text-gray-200">
-                  {cve.description}
-                </p>
-              </div>
-            ))
-          )}
-        </div>
-      ) : (
-        <div className="space-y-2">
-          {top5.length === 0 ? (
-            <p className="text-gray-600 dark:text-gray-300">
-              No data available.
-            </p>
-          ) : (
-            top5.map((cve, index) => (
-              <div key={index} className="border-b pb-3 last:border-none">
-                <a
-                  href={cve.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 font-semibold hover:underline"
-                >
-                  {cve.name}
-                </a>
-                <p className="text-gray-600 dark:text-gray-200">
-                  {cve.topics} | severity: {cve.severity}
-                </p>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+
+      <div className="space-y-2">
+        {cve.length === 0 ? (
+          <p className="text-gray-600 dark:text-gray-300">No data available.</p>
+        ) : (
+          cve.map((cve, index) => (
+            <div key={index} className="border-b pb-3 last:border-none">
+              <a
+                href={cve.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                {cve.name}
+              </a>
+              <p className="text-gray-600 dark:text-gray-200">
+                {cve.description}
+              </p>
+              <p className="text-gray-600 dark:text-gray-200">{cve.severity}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
 
-AllCve.propTypes = {
-  preview: PropTypes.bool,
-};
 export default AllCve;
