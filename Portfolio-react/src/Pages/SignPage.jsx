@@ -16,7 +16,6 @@ const SignPage = () => {
     if (!isRegistered) {
       if (password !== passwordConfirm) {
         throw new Error("Passwords don't match")
-
       } else {
         try {
           const response = await SignUpCall(email, password, username, enterprise);
