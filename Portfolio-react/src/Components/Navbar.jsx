@@ -3,6 +3,7 @@ import Darkmode from "./Darkmode";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Logout from "./Logout";
 
 const Navbar = ({ isLogin, date }) => {
   const nav = useNavigate();
@@ -10,6 +11,7 @@ const Navbar = ({ isLogin, date }) => {
   const [currentWindow, setCurrentWindow] = useState("");
   const [isLandingPage, setIsLandingPage] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
+  const [isLog, setIsLog] = useState(false);
   const item = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#who" },
@@ -19,6 +21,7 @@ const Navbar = ({ isLogin, date }) => {
   const item2 = [
     { name: "Home", path: "/" },
     { name: "Dashboard", path: "/dashboard" },
+    { name: "Features", path: "/features" },
   ];
   useEffect(() => {
     const pages = {
@@ -33,8 +36,14 @@ const Navbar = ({ isLogin, date }) => {
         name: "Cve Pages",
         path: "/cve-pages",
       },
+      "/features": {
+        isLanding: false,
+        name: "Features",
+        path: "/features",
+      },
     };
-
+    const tmp = localStorage.getItem("authToken");
+    if (tmp) setIsLog(true);
     const currentPage = pages[location.pathname] || {
       isLanding: false,
       name: null,
@@ -82,6 +91,7 @@ const Navbar = ({ isLogin, date }) => {
                 ))}
           </div>
         )}
+        <div className="absolute right-70">{isLog && <Logout />}</div>
         <h1 className="text-2xl absolute right-35">{date}</h1>
         <Darkmode />
       </div>

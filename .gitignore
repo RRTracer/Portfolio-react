@@ -4,3 +4,4 @@ package-lock.json
 .idea
 .venv
 .sqlite3
+backend/media/cv.pdf

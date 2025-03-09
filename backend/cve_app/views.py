@@ -58,40 +58,30 @@ def top_cve(request):
         response = requests.get(API_URL)
         data = response.json()
         cve_list = data.get("vulnerabilities", [])
-
-        # Trier par date de publication (descendant)
         sorted_cve = sorted(
             cve_list,
             key=lambda x: x["cve"]["published"],
             reverse=True
-        )[:5]  # Prendre les 5 plus récentes
+        )[:5]
 
         result = []
         for item in sorted_cve:
             cve_info = item["cve"]
             cve_id = cve_info["id"]
-
-            # Récupérer la description en anglais
             description = next(
                 (desc["value"] for desc in cve_info.get("descriptions", []) if desc["lang"] == "en"),
                 "No description available"
             )
-
-            # Récupérer la sévérité (si présente)
             metrics = cve_info.get("metrics", {}).get("cvssMetricV2", [])
             severity = metrics[0].get("baseSeverity") if metrics else "Unknown"
-
-            # Générer les topics basés sur la description
             topics = extract_topics(description)
-
-            # Construire l'objet de réponse
             result.append({
                 "id": cve_id,
                 "name": cve_id,
                 "description": description,
                 "url": f"https://nvd.nist.gov/vuln/detail/{cve_id}",
-                "severity": severity,  # 🔥 Ajout de la sévérité
-                "topics": topics  # 🔥 Ajout des mots-clés
+                "severity": severity,
+                "topics": topics
             })
 
         return Response(result)
@@ -107,40 +97,29 @@ def GetAllCve(request):
         response = requests.get(API_URL)
         data = response.json()
         cve_list = data.get("vulnerabilities", [])
-
-        # Trier par date de publication (descendant)
         sorted_cve = sorted(
             cve_list,
             key=lambda x: x["cve"]["published"],
             reverse=True
         )
-
         result = []
         for item in sorted_cve:
             cve_info = item["cve"]
             cve_id = cve_info["id"]
-
-            # Récupérer la description en anglais
             description = next(
                 (desc["value"] for desc in cve_info.get("descriptions", []) if desc["lang"] == "en"),
                 "No description available"
             )
-
-            # Récupérer la sévérité (si présente)
             metrics = cve_info.get("metrics", {}).get("cvssMetricV2", [])
             severity = metrics[0].get("baseSeverity") if metrics else "Unknown"
-
-            # Générer les topics basés sur la description
             topics = extract_topics(description)
-
-            # Construire l'objet de réponse
             result.append({
                 "id": cve_id,
                 "name": cve_id,
                 "description": description,
                 "url": f"https://nvd.nist.gov/vuln/detail/{cve_id}",
-                "severity": severity,  # 🔥 Ajout de la sévérité
-                "topics": topics  # 🔥 Ajout des mots-clés
+                "severity": severity,
+                "topics": topics
             })
 
         return Response(result)

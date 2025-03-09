@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'cve_app',
+    'FilesServer',
 ]
 
 MIDDLEWARE = [
@@ -123,17 +124,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Media files (CV, images uploaded files ...)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
-CORS_ALLOW_ALL_ORIGINS = False
+CSRF_TRUSTED_ORIGINS = ['http://localhost:5176']
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-     'http://localhost:5173',
-     'http://127.0.0.1:3000',
+     'http://localhost:5176',
 ]
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -147,3 +151,4 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'authToken',
 ]
+
