@@ -11,7 +11,13 @@ import WorkOn from "./WorkOn"; // Assure-toi que le chemin est correct
 
 function CarouselWorkOn({ items }) {
   return (
-    <Carousel className="w-full max-w-lg">
+    <Carousel
+      opts={{
+        align: "center",
+        loop: true,
+      }}
+      className="w-full max-w-lg"
+    >
       <CarouselContent>
         {items.map((item, index) => (
           <CarouselItem key={index}>

@@ -38,6 +38,7 @@ const LandingPage = () => {
         "Same as React.js, I want to learn more about Tailwind CSS for professional purposes.",
       altText: "Tailwind logo",
       linkImage: "Img/tailwind-css-2.svg",
+      pathToNav: "/features",
     },
   ];
 
